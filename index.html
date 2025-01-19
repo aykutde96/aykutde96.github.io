@@ -1,77 +1,723 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Personal Blog</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        header {
-            background-color: #007acc;
-            color: white;
-            padding: 1em 0;
-            text-align: center;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-        }
-        nav ul li {
-            display: inline;
-            margin: 0 15px;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-        }
-        main {
-            padding: 20px;
-        }
-        article {
-            margin-bottom: 2em;
-        }
-        footer {
-            text-align: center;
-            padding: 1em 0;
-            background-color: #333;
-            color: white;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aykut's Personal Blog</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+
+    header {
+      background: linear-gradient(135deg, #007acc, #005f99);
+      color: white;
+      padding: 1.5em 0;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 !important;
+      margin-top: 0.5em !important;
+    }
+
+    nav ul li {
+      display: inline;
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #cce7ff;
+    }
+
+    main>div {
+      display: none;
+      padding: 2em;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    main>div.active {
+      display: block;
+    }
+
+    article {
+      padding: 1.5em;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease;
+    }
+
+    article h2 {
+      margin-top: 0;
+    }
+
+    h3 a {
+      color: #007acc;
+      text-decoration: none;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    h3 a:hover {
+      color: #005f99;
+      transform: scale(1.05);
+    }
+
+    .blog-entry {
+      display: flex;
+      align-items: center;
+      gap: 1em;
+      padding: 1em;
+      background: #f5f5f5;
+      border-radius: 6px;
+      margin-bottom: 1em;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s;
+    }
+
+    .blog-entry img {
+      width: 120px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-right: 10px;
+      align-self: center;
+    }
+
+    .blog-entry .blog-text {
+      flex-grow: 1;
+    }
+
+    .blog-entry a {
+      display: flex;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .blog-entry:hover {
+      transform: scale(1.02);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .blog-entry h3 {
+      margin: 0;
+      font-size: 1.1em;
+      color: #333;
+    }
+
+    .blog-entry p {
+      margin: 0.5em 0 0;
+      font-size: 0.9em;
+      color: #666;
+    }
+
+
+    footer {
+      text-align: center;
+      padding: 1em 0;
+      background-color: #005f99;
+      color: white;
+      box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    footer a {
+      color: #cce7ff;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+
+    #contact article {
+      text-align: center;
+    }
+
+    #contact h2 {
+      font-size: 1.8em;
+      margin-bottom: 0.5em;
+    }
+
+    .social-links {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 20px;
+      align-items: center;
+    }
+
+    .social-icon {
+      text-decoration: none;
+      color: #333;
+      font-size: 1.7em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 15px;
+      border-radius: 4px;
+      background-color: #fff;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .social-icon:hover {
+      background-color: #f0f0f0;
+      color: #007acc;
+    }
+
+
+    .skills-icons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 1.5em;
+    }
+
+    .skill-icon {
+      width: 50px;
+      height: 50px;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+
+    .skill-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+    }
+
+    .skill-icon:hover img {
+      transform: scale(1.1);
+    }
+
+    .skill-icon:hover {
+      transform: translateY(-5px);
+    }
+
+    @media (max-width: 600px) {
+      .skills-icons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .about-title,
+      .about-subtitle {
+        text-align: center;
+        margin: 0 auto;
+        display: block;
+      }
+
+      .about-intro {
+        font-size: 1em;
+      }
+
+      .social-icon {
+        width: 100%;
+      }
+    }
+
+    .accordion {
+      border-radius: 15px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .accordion h3 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      padding: 10px;
+      background-color: #007acc;
+      color: white;
+      margin: 0;
+      border: none;
+      outline: none;
+      text-align: left;
+      transition: background-color 0.3s ease;
+    }
+
+    .accordion h3:hover {
+      background-color: #005f99;
+    }
+
+    .accordion .icon {
+      margin-right: 10px;
+      font-size: 24px;
+      transition: transform 0.3s ease;
+    }
+
+
+    .panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      padding: 0 10px;
+      background-color: #f9f9f9;
+    }
+
+    .panel.open {
+      max-height: 200px;
+      padding: 10px;
+    }
+
+    .panel ul {
+      list-style: none;
+      padding-left: 20px;
+      margin-bottom: 15px;
+    }
+
+    .panel li {
+      padding: 5px 0;
+      position: relative;
+    }
+
+    .panel li::before {
+      content: '•';
+      font-size: 1.2em;
+      color: #007acc;
+      position: absolute;
+      left: -15px;
+    }
+
+    #certificates {
+      padding-top: 1.5em;
+    }
+
+    #certificates h2 {
+      font-size: 1.8em;
+      margin-bottom: 0.5em;
+    }
+
+    #certificates ul {
+      list-style-type: none;
+      padding-left: 1.5em;
+    }
+
+    #certificates li {
+      margin-bottom: 0.3em;
+      position: relative;
+      padding-left: 1.2em;
+    }
+
+    #certificates li::before {
+      content: '\2022';
+      position: absolute;
+      left: 0;
+      color: #007acc;
+      font-size: 1.2em;
+    }
+
+    .about-skills-title {
+      margin-top: 15px;
+    }
+
+    .project-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5em;
+      justify-content: center;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.5em;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      background: #f5f5f5;
+      max-width: 300px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project-card h3 {
+      margin-top: 0;
+    }
+
+    .project-card p {
+      margin: 0.5em 0;
+      color: #666;
+    }
+
+    .project-card .project-link {
+      display: inline-block;
+      margin-top: auto;
+      padding: 0.5em 1em;
+      background: #007acc;
+      color: white;
+      text-decoration: none;
+      border-radius: 15px;
+      transition: background-color 0.3s;
+      width: 150px;
+      text-align: center;
+    }
+
+    .project-card .project-link:hover {
+      background-color: #005f99;
+    }
+
+    .project-card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+  </style>
+  <script>
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const accordions = document.querySelectorAll('.accordion h3');
+      accordions.forEach(header => {
+        header.addEventListener('click', () => {
+          const panel = header.nextElementSibling;
+          const isOpen = panel.classList.contains('open');
+
+          document.querySelectorAll('.panel').forEach(p => {
+            p.classList.remove('open');
+            p.style.maxHeight = null;
+          });
+
+          if (!isOpen) {
+            panel.classList.add('open');
+            panel.style.maxHeight = panel.scrollHeight + 'px';
+          }
+        });
+      });
+    });
+
+    function showSection(sectionId) {
+      const sections = document.querySelectorAll('main > div');
+      sections.forEach((section) => section.classList.remove('active'));
+      document.getElementById(sectionId).classList.add('active');
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      showSection('about');
+      fetchMediumPosts();
+    });
+    function fetchMediumPosts() {
+      const rssUrl = 'https://aykutdenizci.medium.com/feed';
+      fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`)
+        .then((response) => response.json())
+        .then((data) => {
+          const blogContainer = document.getElementById('blogs-content');
+          blogContainer.innerHTML = '';
+          if (data.items) {
+            data.items.slice(0, 6).forEach((item) => {
+              const parser = new DOMParser();
+              const doc = parser.parseFromString(item.description, 'text/html');
+
+              const imgElement = doc.querySelector('img');
+              const thumbnail = imgElement ? imgElement.src : '';
+
+              const blogEntry = document.createElement('div');
+              blogEntry.className = 'blog-entry';
+
+              blogEntry.innerHTML = `
+    <a href="${item.link}" target="_blank" class="blog-link">
+        <img src="${thumbnail}" alt="Blog thumbnail">
+        <div class="blog-text">
+            <h3>${item.title}</h3>
+            <p>${item.description.replace(/<[^>]*>/g, '').substring(0, 250)}...</p>
+        </div>
+    </a>
+`;
+              if (!thumbnail) {
+                blogEntry.querySelector('img').style.display = 'none';
+              }
+
+              blogContainer.appendChild(blogEntry);
+            });
+          } else {
+            blogContainer.innerHTML = '<p>No articles found.</p>';
+          }
+        })
+        .catch(() => {
+          document.getElementById('blogs-content').innerHTML = '<p>Failed to load Medium articles.</p>';
+        });
+    }
+  </script>
 </head>
+
 <body>
-    <header>
-        <h1>Welcome to My Personal Blog</h1>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <article id="home">
-            <h2>Latest Post</h2>
-            <p>Welcome to my blog! This is where I share my thoughts, projects, and more.</p>
-        </article>
-        <article id="about">
-            <h2>About Me</h2>
-            <p>Hello! I'm Aykut, a developer passionate about technology, coding, and learning new things.</p>
-        </article>
-        <article id="contact">
-            <h2>Contact</h2>
-            <p>You can reach me via <a href="mailto:aykut@example.com">email</a> or follow me on <a href="https://github.com/aykutde96">GitHub</a>.</p>
-        </article>
-    </main>
-    <footer>
-        <p>&copy; 2025 Aykut's Blog. All rights reserved.</p>
-    </footer>
+  <header>
+    <h1>Aykut Denizci</h1>
+    <nav>
+      <ul>
+        <li><a href="#" onclick="showSection('about')">About</a></li>
+        <li><a href="#" onclick="showSection('projects')">Projects</a></li>
+        <li><a href="#" onclick="showSection('blogs')">Blogs</a></li>
+        <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <div id="about" class="active">
+      <article>
+        <h2 class="about-title">Hi 👋, I'm Aykut</h2>
+        <h3 class="about-subtitle">Software Developer in Test</h3>
+        <p class="about-intro">🌱 I started in the field of software testing at Testinium company, I became ready for
+          the sector with the test master training I received here, and then I continued to improve myself in the field
+          of software testing by constantly learning new information and researching new technologies. I work as a
+          Developer in Test at Trendyol, where I specialize in creating UI test automation for both web and mobile web
+          applications using Cypress and Playwright. I integrate these automated tests into CI/CD pipelines to ensure
+          smooth deployments. Additionally, I develop load tests and contract tests to enhance system reliability. My
+          role also involves managing and executing functional testing processes for web and mobile platforms to
+          maintain product quality and performance.</p>
+
+        <div id="experience">
+          <h2>Experience</h2>
+          <div class="accordion">
+            <h3>Testinium (02.2021 - 01.2023) <span class="icon">&#8594;</span></h3>
+            <div class="panel">
+              <ul>
+                <li> Writing test cases according to requirements document</li>
+                <li>Running manual tests of the product</li>
+                <li>Writing UI test automation with Java, Selenium, Gauge</li>
+                <li>Scheduling the written automation through Testinium
+                  and running it at certain periods</li>
+                <li>Performing manual API tests with Postman</li>
+                <li>Writing API automation with Karate framework</li>
+                <li>Reporting found bugs to developers</li>
+                <li>Process follow-up via Jira</li>
+                <li>Writing automation scenarios with TypeScript and
+                  Playwright</li>
+              </ul>
+            </div>
+          </div>
+          <div class="accordion">
+            <h3>Beyn (01.2023 - 10.2023) <span class="icon">&#8594;</span></h3>
+            <div class="panel">
+              <ul>
+                <li>Performing functional and regression tests on Web and
+                  Mobile</li>
+                <li>Preparing of test scenarios, test cases and test defect
+                  reports</li>
+                <li> Web API testing with Postman and Requestly</li>
+                <li> Performing mobile tests on different devices and versions
+                  with BrowserStack</li>
+                <li> Reporting found bugs to developers and product owner</li>
+                <li> Working with Kanban methodology</li>
+                <li> Project management with Favro</li>
+                <li> Detection of improvements</li>
+              </ul>
+            </div>
+          </div>
+          <div class="accordion">
+            <h3>Trendyol (10.2023 - Present) <span class="icon">&#8594;</span></h3>
+
+            <div class="panel">
+              <ul>
+                <li>Run functional test processes for Web and Mobile web clients.</li>
+                <li>Write test automation projects using Cypress and Playwright, and manage their maintenance and
+                  improvement processes.</li>
+                <li>Prepare load test requirements for the used BFFs, create test scenarios, and execute them.</li>
+                <li>Create contracts for the provider side between BFF and API, and ensure pipeline integrations.</li>
+                <li>Monitor errors through Kibana, Grafana, NewRelic, and Jaeger, find errors, and report them.</li>
+                <li>Follow the process of development from testing phase until deployment is completed.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <h2 class="about-skills-title">Languages and Tools:</h2>
+        <div class="skills-icons">
+          <a href="https://www.cypress.io" target="_blank" rel="noreferrer" class="skill-icon">
+            <img
+              src="https://raw.githubusercontent.com/simple-icons/simple-icons/6e46ec1fc23b60c8fd0d2f2ff46db82e16dbd75f/icons/cypress.svg"
+              alt="cypress" />
+          </a>
+          <a href="https://www.docker.com/" target="_blank" rel="noreferrer" class="skill-icon">
+            <img
+              src="https://raw.githubusercontent.com/devicons/devicon/master/icons/docker/docker-original-wordmark.svg"
+              alt="docker" />
+          </a>
+          <a href="https://git-scm.com/" target="_blank" rel="noreferrer" class="skill-icon">
+            <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" />
+          </a>
+          <a href="https://www.java.com" target="_blank" rel="noreferrer" class="skill-icon">
+            <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg"
+              alt="java" />
+          </a>
+          <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"
+            class="skill-icon">
+            <img
+              src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg"
+              alt="javascript" />
+          </a>
+          <a href="https://www.jenkins.io" target="_blank" rel="noreferrer" class="skill-icon">
+            <img src="https://www.vectorlogo.zone/logos/jenkins/jenkins-icon.svg" alt="jenkins" />
+          </a>
+          <a href="https://www.mathworks.com/" target="_blank" rel="noreferrer" class="skill-icon">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Matlab_Logo.png" alt="matlab" />
+          </a>
+          <a href="https://www.oracle.com/" target="_blank" rel="noreferrer" class="skill-icon">
+            <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/oracle/oracle-original.svg"
+              alt="oracle" />
+          </a>
+          <a href="https://www.postgresql.org" target="_blank" rel="noreferrer" class="skill-icon">
+            <img
+              src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg"
+              alt="postgresql" />
+          </a>
+          <a href="https://postman.com" target="_blank" rel="noreferrer" class="skill-icon">
+            <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="postman" />
+          </a>
+          <a href="https://www.selenium.dev" target="_blank" rel="noreferrer" class="skill-icon">
+            <img
+              src="https://raw.githubusercontent.com/detain/svg-logos/780f25886640cef088af994181646db2f6b1a3f8/svg/selenium-logo.svg"
+              alt="selenium" />
+          </a>
+          <a href="https://appium.io" target="_blank" rel="noreferrer" class="skill-icon">
+            <img
+              src="https://assets.perimeterx.com/image/upload/dpr_auto,f_auto,w_1200/blog/2017/step-by-step-guide-setting-up-appium/appium-logo_xn7bct"
+              alt="appium" />
+          </a>
+          <a href="https://github.com/karatelabs/karate" target="_blank" class="skill-icon">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Karate_software_logo.svg/1200px-Karate_software_logo.svg.png"
+              alt="karate" />
+          </a>
+          <a href="https://rest-assured.io/" target="_blank" class="skill-icon">
+            <img src="https://www.entrofi.net/wp-content/uploads/2020/01/rest-assured-logo.png" alt="rest-assured" />
+          </a>
+          <a href="https://playwright.dev/" target="_blank" class="skill-icon">
+            <img
+              src="https://user-images.githubusercontent.com/62073691/236838723-e47d880d-406a-46cc-9e7a-1219d18b60a2.png"
+              alt="playwright" />
+          </a>
+        </div>
+
+        <div id="certificates">
+          <h2>Certificates</h2>
+          <ul>
+            <li>ISTQB Foundation Level (CTFL)</li>
+
+            <li> BTK Akademi - Software Test Automation</li>
+
+            <li>BTK Akademi - API and API Testing</li>
+
+            <li> Patika - ÇiçekSepeti Test Automation Bootcamp</li>
+
+            <li> Udemy - Automated Software Testing with Playwright</li>
+
+          </ul>
+        </div>
+
+      </article>
+    </div>
+
+    <div id="projects">
+      <article>
+        <h2>Featured Projects</h2>
+        <p>Below, you can find a few automation projects I have worked on. For more, you can check out my <a
+            href="https://github.com/aykutde96" target="_blank">GitHub account</a>.</p>
+        <div class="project-cards">
+          <div class="project-card">
+            <h3>Api Automation with Rest Assured and WireMock Server</h3>
+            <p>An API test was written using Rest Assured by simulating an API response with WireMock and mocking
+              responses for various status codes.</p>
+            <p><strong>Technologies:</strong> Java, Rest Assured, WireMock, Gauge</p>
+            <a href="https://github.com/aykutde96/MPFinanceTestCase/tree/main/AykutDenizci_MPFinanceAPITestCase"
+              target="_blank" class="project-link">View on GitHub</a>
+          </div>
+          <div class="project-card">
+            <h3>Api Test Automation with Karate DSL</h3>
+            <p>An API test automation project was created using the Karate DSL framework in the Gherkin language.</p>
+            <p><strong>Technologies:</strong> Java, Karate DSL, Gherkin, JavaScript</p>
+            <a href="https://github.com/aykutde96/karate-base" target="_blank" class="project-link">View on GitHub</a>
+          </div>
+          <div class="project-card">
+            <h3>Playwright Cucumber Project</h3>
+            <p>A test automation project was created in BDD format using the Playwright framework with Cucumber, and
+              CI/CD integration was implemented using GitHub Actions.</p>
+            <p><strong>Technologies:</strong> TypeScript, Playwright, Cucumber, Github Action</p>
+            <a href="https://github.com/aykutde96/playwright-cucumber-simple" target="_blank" class="project-link">View
+              on GitHub</a>
+          </div>
+          <div class="project-card">
+            <h3>Selenium UI Automation</h3>
+            <p>Test automation was written using Java Selenium in the Page Object Model format for various UI scenarios.
+            </p>
+            <p><strong>Technologies:</strong> Java, Selenium</p>
+            <a href="https://github.com/aykutde96/CicekSepetiFinal/tree/main/CicekSepetiUIProject" target="_blank"
+              class="project-link">View on GitHub</a>
+          </div>
+          <div class="project-card">
+            <h3>Selenium Cucumber UI Automation and CI/CD integration</h3>
+            <p>UI automation was written using Selenium with Cucumber, CI/CD integration was implemented with GitHub
+              Actions, and a test report was generated.</p>
+            <p><strong>Technologies:</strong> Java, Selenium, Cucumber, Github Action</p>
+            <a href="https://github.com/aykutde96/pointr-test-case" target="_blank" class="project-link">View on
+              GitHub</a>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div id="blogs">
+      <article>
+        <h2>Recent Blogs</h2>
+        <div id="blogs-content">
+          <p>Loading articles...</p>
+        </div>
+      </article>
+    </div>
+    <div id="contact">
+      <article>
+        <h2>Contact Me</h2>
+        <p>
+          I’d love to hear from you! Feel free to reach out via
+          <a href="mailto:aykutdenizci@outlook.com">E-mail</a> or connect with me on
+          <a href="https://www.linkedin.com/in/aykut-denizci/">LinkedIn</a>.
+        </p>
+
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/aykut-denizci/" target="_blank" class="social-icon">
+            <i class="fab fa-linkedin"></i> LinkedIn
+          </a>
+          <a href="https://github.com/aykutde96" target="_blank" class="social-icon">
+            <i class="fab fa-github"></i> GitHub
+          </a>
+          <a href="https://aykutdenizci.medium.com/" target="_blank" class="social-icon">
+            <i class="fab fa-medium"></i> Medium
+          </a>
+          <a href="mailto:aykutdenizci@outlook.com" class="social-icon">
+            <i class="fas fa-envelope"></i> Email
+          </a>
+        </div>
+      </article>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2025 Aykut's Blog. All rights reserved.</p>
+  </footer>
 </body>
+
 </html>
